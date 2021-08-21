@@ -16,7 +16,7 @@ public class ParticleGenerator : MonoBehaviour
 {
     private float SPAWN_INTERVAL = 0.025f; // How much time until the next particle spawns
     private float lastSpawnTime = float.MinValue; //The last spawn time
-    public int PARTICLE_LIFETIME = 3; //How much time will each particle live
+    public float PARTICLE_LIFETIME = 3; //How much time will each particle live
     public Vector3 particleForce; //Is there a initial force particles should have?
     public DynamicParticle.STATES particlesState = DynamicParticle.STATES.WATER; // The state of the particles spawned
     public Transform particlesParent; // Where will the spawned particles will be parented (To avoid covering the whole inspector with them)

@@ -6,6 +6,9 @@ public class CoffeeMachine : MonoBehaviour
 {
     [SerializeField] private ParticleGenerator generator;
 
+    /// <summary>
+    /// Button press on coffee machine
+    /// </summary>
     public void TogglePouring()
     {
         generator.isActivated = !generator.isActivated;

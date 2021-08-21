@@ -7,30 +7,34 @@ public class CupReceiver : BaseCup
     [SerializeField] private Transform fillTransform;
     [SerializeField] private SpriteRenderer fillColor;
 
+    [Header("Colors")]
     [SerializeField] private Color coffeeColor;
 
     //[SerializeField] private Color coffeeColorDark; my be used in the future
     [SerializeField] private Color coffeeColorLight;
 
     [SerializeField] private Color milkColor;
+
     private DynamicParticle.STATES currentState;
     private bool isEmpty = true;
     private float mixureLevel = 0; // for lerping
+
+    private float maxScale = 100;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("DynamicParticle"))
         {
-            if (fillTransform.transform.localScale.y < 100)
+            if (fillTransform.transform.localScale.y < maxScale)
             {
                 Debug.Log("Getting filled");
                 fillTransform.transform.localScale += new Vector3(0, 1, 0);
 
-                if (isEmpty)
+                if (isEmpty) // for the first base color fill
                 {
                     SetCup(collision.GetComponent<DynamicParticle>());
                 }
-                else
+                else // "mix" the colours together
                 {
                     LerpColor(collision.GetComponent<DynamicParticle>());
                 }

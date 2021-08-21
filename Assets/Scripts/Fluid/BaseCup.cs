@@ -16,4 +16,12 @@ public class BaseCup : MonoBehaviour
 
         transform.position = cam.ScreenToWorldPoint(Input.mousePosition) - cupOffset;
     }
+
+    /// <summary>
+    /// For resseting in it original state when rightclick to drop something
+    /// </summary>
+    virtual public void Reset()
+    {
+        isGrabbed = false;
+    }
 }

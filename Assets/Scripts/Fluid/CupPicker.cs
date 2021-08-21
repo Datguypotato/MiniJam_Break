@@ -14,9 +14,12 @@ public class CupPicker : MonoBehaviour
         {
             RaycastHit2D hit = Physics2D.Raycast(cam.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
 
+            if (hit.collider)
+                Debug.Log(hit.collider.name);
+
             if (lastCupPicked != null) // drop cup
             {
-                lastCupPicked.isGrabbed = false;
+                lastCupPicked.Reset();
                 lastCupPicked = null;
                 return;
             }
