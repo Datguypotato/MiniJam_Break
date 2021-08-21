@@ -54,7 +54,7 @@ public class CustomersList : MonoBehaviour
         if (customer[0].served)
         {
             cleanCustomer(objs[0]);
-            customer.Remove(customer[0]);
+            customer.RemoveAt(0);
         }
     }
 }
