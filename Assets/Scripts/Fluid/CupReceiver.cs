@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class CupReceiver : BaseCup
 {
@@ -10,10 +11,16 @@ public class CupReceiver : BaseCup
     [Header("Colors")]
     [SerializeField] private Color coffeeColor;
 
-    //[SerializeField] private Color coffeeColorDark; my be used in the future
     [SerializeField] private Color coffeeColorLight;
-
     [SerializeField] private Color milkColor;
+
+    [Header("Content")]
+    [SerializeField] private int coffeeAmount;
+
+    [SerializeField] private int milkAmount;
+    [SerializeField] private int sugarCubes;
+
+    [SerializeField] private TMP_Text cupInfoText;
 
     private DynamicParticle.STATES currentState;
     private bool isEmpty = true;
@@ -25,7 +32,7 @@ public class CupReceiver : BaseCup
     {
         if (collision.CompareTag("DynamicParticle"))
         {
-            if (fillTransform.transform.localScale.y < maxScale)
+            if (fillTransform.transform.localScale.y <= maxScale)
             {
                 Debug.Log("Getting filled");
                 fillTransform.transform.localScale += new Vector3(0, 1, 0);
@@ -39,9 +46,28 @@ public class CupReceiver : BaseCup
                     LerpColor(collision.GetComponent<DynamicParticle>());
                 }
 
+                AddContent(collision.GetComponent<DynamicParticle>());
                 Destroy(collision.gameObject);
             }
         }
+    }
+
+    private void AddContent(DynamicParticle particle)
+    {
+        switch (particle.GetState())
+        {
+            case DynamicParticle.STATES.COFFEE:
+                coffeeAmount++;
+                break;
+
+            case DynamicParticle.STATES.MILK:
+                milkAmount++;
+                break;
+
+            default:
+                break;
+        }
+        cupInfoText.text = $"Coffee: {coffeeAmount} \nMilk: {milkAmount} \nSugar: {sugarCubes}";
     }
 
     private void SetCup(DynamicParticle particle)
