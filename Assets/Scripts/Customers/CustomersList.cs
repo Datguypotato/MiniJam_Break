@@ -4,21 +4,15 @@ using UnityEngine;
 
 public class CustomersList : MonoBehaviour
 {
-    [SerializeField] List<Transform> customersPoints = new List<Transform>();
-    [SerializeField] Customer cust;
-    [SerializeField] List<Customer> customer = new List<Customer>();
-    [SerializeField] List<GameObject> objs = new List<GameObject>();
+    [SerializeField] private List<Transform> customersPoints = new List<Transform>();
+    [SerializeField] private Customer cust;
+    [SerializeField] private List<Customer> customer = new List<Customer>();
+    [SerializeField] private List<GameObject> objs = new List<GameObject>();
 
     public int customersCount = 0;
-    [SerializeField] int customersMaxCount = 5;
+    [SerializeField] private int customersMaxCount = 5;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    void instantiateCustomer()
+    private void instantiateCustomer()
     {
         if (customersCount < customersMaxCount)
         {
@@ -31,27 +25,27 @@ public class CustomersList : MonoBehaviour
 
     public void serveTest()
     {
-        customer[0].served = true;
+        //customer[0].served = true;
     }
 
-    void cleanCustomer(GameObject obj)
+    private void cleanCustomer(GameObject obj)
     {
         Destroy(obj);
     }
 
-    void moveToApoint()
+    private void moveToApoint()
     {
         //transform.position = Vector2.MoveTowards(transform.position, customersPoints[customersCount].position, 1);
         //if (transform.position.y <= customersPoints[customersCount].position.y && customersCount < customersMaxCount)
-          //  customersCount++;
+        //  customersCount++;
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         instantiateCustomer();
         moveToApoint();
-        if (customer[0].served)
+        //if (customer[0].served)
         {
             cleanCustomer(objs[0]);
             customer.RemoveAt(0);

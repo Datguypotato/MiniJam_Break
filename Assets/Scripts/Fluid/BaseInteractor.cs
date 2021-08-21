@@ -2,19 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseCup : MonoBehaviour
+public class BaseInteractor : MonoBehaviour
 {
     public bool isGrabbed = false;
 
     [SerializeField] protected Camera cam;
     [SerializeField] protected Vector3 cupOffset;
 
-    protected void Update()
+    // on left click
+    public virtual void Pick()
     {
-        if (!isGrabbed)
-            return;
+    }
 
-        transform.position = cam.ScreenToWorldPoint(Input.mousePosition) - cupOffset;
+    // on right click
+    public virtual void Interact()
+    {
     }
 
     /// <summary>

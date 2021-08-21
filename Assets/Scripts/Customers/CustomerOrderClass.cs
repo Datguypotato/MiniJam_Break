@@ -5,20 +5,20 @@ using UnityEngine.UI;
 
 public class CustomerOrderClass : MonoBehaviour
 {
-    [SerializeField] Text price, ordername;
-    [SerializeField] string[] orders = { "Coffee", "Coffe with milk", "Sweet Coffe" };
+    [SerializeField] private Text price, ordername;
+    [SerializeField] private string[] orders = { "Coffee", "Coffe with milk", "Sweet Coffe" };
 
-    [SerializeField] Dictionary<string, int> orderDict = new Dictionary<string, int>();
+    [SerializeField] private Dictionary<string, int> orderDict = new Dictionary<string, int>();
 
     public float sugarAmount, milkAmount;
 
-    void settingTheOrderToMake()
+    private void settingTheOrderToMake()
     {
-        sugarAmount = Random.Range(1, 9);
+        sugarAmount = Random.Range(1, 4);
         milkAmount = Random.Range(1, 10);
     }
 
-    int setOrderPrice()
+    private int setOrderPrice()
     {
         int ind = 0;
         if (sugarAmount > milkAmount && milkAmount <= 1)
@@ -31,24 +31,26 @@ public class CustomerOrderClass : MonoBehaviour
         testing(ref ind);
         return orderDict[orders[ind]];
     }
+
     // TESTING THE CUSTOMER OREDER CLASS
-    void testing(ref int n)
+    private void testing(ref int n)
     {
         ordername.text = orders[n];
     }
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         settingTheOrderToMake();
     }
+
     public void randomizingorder()
     {
         settingTheOrderToMake();
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         //int price = setOrderPrice();
         price.text = setOrderPrice().ToString();

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class CupReceiver : BaseCup
+public class CupReceiver : BaseInteractor
 {
     [SerializeField] private Transform fillTransform;
     [SerializeField] private SpriteRenderer fillColor;
@@ -27,6 +27,32 @@ public class CupReceiver : BaseCup
     private float mixureLevel = 0; // for lerping
 
     private float maxScale = 100;
+
+    public override void Reset()
+    {
+        base.Reset();
+        isGrabbed = false;
+    }
+
+    public override void Pick()
+    {
+        base.Pick();
+        isGrabbed = true;
+    }
+
+    public override void Interact()
+    {
+        base.Interact();
+        // nothing yet
+    }
+
+    private void Update()
+    {
+        if (!isGrabbed)
+            return;
+
+        transform.position = cam.ScreenToWorldPoint(Input.mousePosition) - cupOffset;
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

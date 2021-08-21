@@ -5,11 +5,16 @@ using UnityEngine;
 /// <summary>
 /// This is the player cup for pouring stuff in other cups
 /// </summary>
-public class CupBehaviour : BaseCup
+public class CupBehaviour : BaseInteractor
 {
     private ParticleGenerator particleGenerator;
     [SerializeField] private float rotateSpeed = 1;
     private bool isPooring;
+
+    private void Start()
+    {
+        particleGenerator = GetComponentInChildren<ParticleGenerator>();
+    }
 
     public override void Reset()
     {
@@ -18,24 +23,25 @@ public class CupBehaviour : BaseCup
             StartCoroutine(Pour());
     }
 
-    private void Start()
+    public override void Interact()
     {
-        particleGenerator = GetComponentInChildren<ParticleGenerator>();
+        base.Interact();
+        StartCoroutine(Pour());
+    }
+
+    public override void Pick()
+    {
+        base.Pick();
+        isGrabbed = true;
     }
 
     // Update is called once per frame
     protected void Update()
     {
-        base.Update();
         if (!isGrabbed)
             return;
 
-        // tilting the cup
-        if (Input.GetMouseButtonDown(0))
-        {
-            StartCoroutine(Pour());
-            Debug.Log("click");
-        }
+        transform.position = cam.ScreenToWorldPoint(Input.mousePosition) - cupOffset;
     }
 
     private IEnumerator Pour()
