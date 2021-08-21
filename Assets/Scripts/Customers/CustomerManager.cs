@@ -24,9 +24,12 @@ public class CustomerManager : MonoBehaviour
 
     private void Update()
     {
+        // testing reason
         if (Input.GetKeyDown(KeyCode.Space))
             InstantiateCustomer();
     }
+
+    // function for updating position
 
     private void InstantiateCustomer()
     {

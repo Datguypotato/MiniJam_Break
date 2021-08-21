@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// The base of everything interactable
+/// they must have the tag Interactable
+/// </summary>
 public class BaseInteractor : MonoBehaviour
 {
     public bool isGrabbed = false;
@@ -20,7 +24,7 @@ public class BaseInteractor : MonoBehaviour
     }
 
     /// <summary>
-    /// For resseting in it original state when rightclick to drop something
+    /// For reseting in it original state
     /// </summary>
     virtual public void Reset()
     {

@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// TODO
+
 public class Customer : BaseInteractor
 {
     public int sugarAmount;
@@ -11,6 +13,8 @@ public class Customer : BaseInteractor
 
     public override void Pick()
     {
+        // happends on click check if they are first in line
+        // and add order to some kind of UI
         base.Pick();
         Debug.Log("Been clicked on!");
         if (nextInLine)
@@ -18,18 +22,30 @@ public class Customer : BaseInteractor
         }
     }
 
+    /// <summary>
+    /// move to a new position
+    /// </summary>
+    /// <param name="newPos"></param>
     public void Move(Vector3 newPos)
     {
         Debug.Log("position received " + newPos);
         StartCoroutine(MoveCoroutine(newPos));
     }
 
+    /// <summary>
+    /// move to multiple locations
+    /// haven't tested it yet
+    /// </summary>
+    /// <param name="newPos"></param>
     public void Move(Vector3[] newPos)
     {
         Debug.Log("position received " + newPos);
         StartCoroutine(MoveCoroutine(newPos));
     }
 
+    /// <summary>
+    /// Called when clicked on customer
+    /// </summary>
     private void settingTheOrderToMake()
     {
         sugarAmount = Random.Range(1, 4);

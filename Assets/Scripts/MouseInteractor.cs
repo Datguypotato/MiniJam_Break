@@ -14,17 +14,18 @@ public class MouseInteractor : MonoBehaviour
         {
             RaycastHit2D hit = Physics2D.Raycast(cam.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
 
-            if (hit.collider)
-                Debug.Log(hit.collider.name);
+            // debug reasons
+            //if (hit.collider)
+            //    Debug.Log(hit.collider.name);
 
-            if (lastPicked != null) // drop cup
+            if (lastPicked != null) // Reset object
             {
                 lastPicked.Reset();
                 lastPicked = null;
                 return;
             }
 
-            if (hit.collider != null && hit.collider.CompareTag("Interactive")) // pick up cup
+            if (hit.collider != null && hit.collider.CompareTag("Interactive")) // pick up interactable
             {
                 BaseInteractor cup = hit.collider.GetComponent<BaseInteractor>();
                 cup.isGrabbed = true;
@@ -33,7 +34,7 @@ public class MouseInteractor : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1)) // use said object
         {
             lastPicked.Interact();
         }
