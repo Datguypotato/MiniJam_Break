@@ -6,6 +6,8 @@ using TMPro;
 
 public class CustomerOrderClass : MonoBehaviour
 {
+    CustomerManager customerManager;
+
     [SerializeField] private TextMeshProUGUI price, ordername, sugar, milk;
     [SerializeField] private string[] orders = { "Coffee", "Coffee with milk", "Sweet Coffe" };
 
@@ -14,6 +16,21 @@ public class CustomerOrderClass : MonoBehaviour
     Customer[] customers;
 
     int orderCount = 1;
+
+    private void Start()
+    {
+        //settingTheOrderToMake();
+    }
+    public void servingFirstCustomer()
+    {
+        customerManager.ind--;
+        orderCount++;
+        foreach (Customer cust in customers)
+        {
+            cust.Move(customerManager.spots[customerManager.ind].spot);
+            customerManager.spots[customerManager.ind].isFilled = false;
+        }
+    }
 
     private void settingTheOrderToMake()
     {
@@ -29,10 +46,6 @@ public class CustomerOrderClass : MonoBehaviour
                 price.text = setOrderPrice(cust).ToString();
             }
         }    
-    }
-    private void Start()
-    {
-        //settingTheOrderToMake();
     }
 
     //<summary>
@@ -60,6 +73,7 @@ public class CustomerOrderClass : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        customerManager = FindObjectOfType<CustomerManager>();
         if (orderCount > 0)
         {
             settingTheOrderToMake();

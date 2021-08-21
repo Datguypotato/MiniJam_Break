@@ -3,15 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // TODO
-
 public class Customer : BaseInteractor
 {
-    CustomerOrderClass customerOrder;
-
     public int sugarAmount;
     public int milkAmount;
     public bool nextInLine = false;
-    public bool isangry = false;
+    public bool isangry = false , ishappy = false;
     [SerializeField] private Vector3 cornerPath;
 
     [SerializeField] float waitingTime, maxWaitingTime = 5;
@@ -55,7 +52,7 @@ public class Customer : BaseInteractor
     private void settingTheOrderToMake()
     {
         sugarAmount = Random.Range(1, 4);
-        milkAmount = Random.Range(1, 10);
+        milkAmount  = Random.Range(1, 10);
     }
 
     void updatingWaitingTime()
@@ -82,7 +79,7 @@ public class Customer : BaseInteractor
         for (int i = 0; i < newPos.Length; i++)
         {
             float t = 0;
-            while (Vector3.Distance(transform.position, newPos[i]) > 0.1)
+            while (Vector3.Distance(transform.position, newPos[i]) > 0.1f)
             {
                 t += Time.deltaTime / 2;
                 transform.position = Vector2.Lerp(transform.position, newPos[i], t);

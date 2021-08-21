@@ -16,11 +16,13 @@ public class BaseInteractor : MonoBehaviour
     // on left click
     public virtual void Pick()
     {
+
     }
 
     // on right click
     public virtual void Interact()
     {
+
     }
 
     /// <summary>
