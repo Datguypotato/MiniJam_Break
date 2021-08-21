@@ -5,16 +5,10 @@ using UnityEngine;
 /// <summary>
 /// This is the player cup for pouring stuff in other cups
 /// </summary>
-public class CupBehaviour : MonoBehaviour
+public class CupBehaviour : BaseCup
 {
     private ParticleGenerator particleGenerator;
     [SerializeField] private float rotateSpeed = 1;
-    [SerializeField] private float tiltLeftMax = 110;
-    [SerializeField] private float titltRightMax = -10;
-    [SerializeField] private float pourSpot = 100;
-
-    [SerializeField] private Vector3 cupOffset;
-    [SerializeField] private Camera cam;
     private bool isPooring;
 
     private void Start()
@@ -23,11 +17,12 @@ public class CupBehaviour : MonoBehaviour
     }
 
     // Update is called once per frame
-    private void Update()
+    protected void Update()
     {
-        // follow mousecursor
-        transform.position = cam.ScreenToWorldPoint(Input.mousePosition) - cupOffset;
+        if (!isGrabbed)
+            return;
 
+        base.Update();
         // tilting the cup
         if (Input.GetMouseButtonDown(0))
         {
@@ -55,7 +50,7 @@ public class CupBehaviour : MonoBehaviour
         {
             while (transform.rotation.eulerAngles.z < 100)
             {
-                transform.Rotate(new Vector3(0, 0, 1));
+                transform.Rotate(new Vector3(0, 0, 1) * rotateSpeed);
                 yield return new WaitForEndOfFrame();
             }
             isPooring = true;
