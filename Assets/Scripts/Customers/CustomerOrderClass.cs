@@ -2,46 +2,54 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class CustomerOrderClass : MonoBehaviour
 {
-    [SerializeField] private Text price, ordername;
-    [SerializeField] private string[] orders = { "Coffee", "Coffe with milk", "Sweet Coffe" };
+    [SerializeField] private TextMeshProUGUI price, ordername, sugar, milk;
+    [SerializeField] private string[] orders = { "Coffee", "Coffee with milk", "Sweet Coffe" };
 
     [SerializeField] private Dictionary<string, int> orderDict = new Dictionary<string, int>();
 
-    public float sugarAmount, milkAmount;
+    Customer[] customers;
+
+    int orderCount = 1;
 
     private void settingTheOrderToMake()
     {
-        sugarAmount = Random.Range(1, 4);
-        milkAmount = Random.Range(1, 10);
+        customers = FindObjectsOfType<Customer>();
+        foreach(Customer cust in customers)
+        {
+            if (cust.nextInLine)
+            {
+                cust.sugarAmount = Random.Range(1, 4);
+                cust.milkAmount = Random.Range(1, 10);
+                sugar.text  = cust.sugarAmount.ToString();
+                milk.text   = cust.milkAmount.ToString();
+                price.text = setOrderPrice(cust).ToString();
+            }
+        }    
     }
-
-    private int setOrderPrice()
-    {
-        int ind = 0;
-        if (sugarAmount > milkAmount && milkAmount <= 1)
-            ind = 0;
-        else if (sugarAmount < milkAmount && milkAmount > 1)
-            ind = 1;
-        else if (sugarAmount > milkAmount && sugarAmount > 5 && milkAmount <= 4)
-            ind = 2;
-        orderDict[orders[ind]] = ind * 2 + 20;
-        testing(ref ind);
-        return orderDict[orders[ind]];
-    }
-
-    // TESTING THE CUSTOMER OREDER CLASS
-    private void testing(ref int n)
-    {
-        ordername.text = orders[n];
-    }
-
-    // Start is called before the first frame update
     private void Start()
     {
-        settingTheOrderToMake();
+        //settingTheOrderToMake();
+    }
+
+    //<summary>
+    //This function prints the order name and returns it's price value
+    //</summary>
+    private int setOrderPrice(Customer cust)
+    {
+        int ind = 0;
+        if (cust.sugarAmount > cust.milkAmount && cust.milkAmount <= 1)
+            ind = 0;
+        else if (cust.sugarAmount < cust.milkAmount && cust.milkAmount > 1)
+            ind = 1;
+        else if (cust.sugarAmount > cust.milkAmount && cust.sugarAmount > 5 && cust.milkAmount <= 4)
+            ind = 2;
+        ordername.text = orders[ind];
+        orderDict[orders[ind]] = ind * 2 + 20;
+        return orderDict[orders[ind]];
     }
 
     public void randomizingorder()
@@ -52,7 +60,10 @@ public class CustomerOrderClass : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        //int price = setOrderPrice();
-        price.text = setOrderPrice().ToString();
+        if (orderCount > 0)
+        {
+            settingTheOrderToMake();
+            orderCount--;
+        }
     }
 }

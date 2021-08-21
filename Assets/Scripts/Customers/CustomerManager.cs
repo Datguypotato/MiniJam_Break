@@ -18,7 +18,6 @@ public class CustomerManager : MonoBehaviour
         {
             spots[i] = new WaitingLineSpot(waitingLineParent.GetChild(i).transform.position);
         }
-
         InstantiateCustomer();
     }
 
@@ -44,6 +43,7 @@ public class CustomerManager : MonoBehaviour
                 customer.Move(spots[i].spot);
                 spots[i].isFilled = true;
                 spots[i].currentCustomer = customer;
+                
                 return;
             }
         }

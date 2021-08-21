@@ -6,10 +6,15 @@ using UnityEngine;
 
 public class Customer : BaseInteractor
 {
+    CustomerOrderClass customerOrder;
+
     public int sugarAmount;
     public int milkAmount;
     public bool nextInLine = false;
+    public bool isangry = false;
     [SerializeField] private Vector3 cornerPath;
+
+    [SerializeField] float waitingTime, maxWaitingTime = 5;
 
     public override void Pick()
     {
@@ -19,6 +24,7 @@ public class Customer : BaseInteractor
         Debug.Log("Been clicked on!");
         if (nextInLine)
         {
+
         }
     }
 
@@ -52,10 +58,18 @@ public class Customer : BaseInteractor
         milkAmount = Random.Range(1, 10);
     }
 
+    void updatingWaitingTime()
+    {
+        waitingTime += Time.deltaTime / 3;
+        if (waitingTime >= maxWaitingTime)
+            isangry = true;
+    }
+
+
     private IEnumerator MoveCoroutine(Vector3 newPos)
     {
         float t = 0;
-        while (Vector3.Distance(transform.position, newPos) > 0.1)
+        while (Vector3.Distance(transform.position, newPos) > 0.1f)
         {
             t += Time.deltaTime / 2;
             transform.position = Vector2.Lerp(transform.position, newPos, t);
