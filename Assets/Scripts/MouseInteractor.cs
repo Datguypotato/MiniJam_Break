@@ -5,7 +5,7 @@ using UnityEngine;
 public class MouseInteractor : MonoBehaviour
 {
     [SerializeField] private Camera cam;
-    [SerializeField] private BaseInteractor lastPicked;
+    [SerializeField] public BaseInteractor lastPicked;
 
     // Update is called once per frame
     private void Update()
@@ -31,9 +31,8 @@ public class MouseInteractor : MonoBehaviour
                 if (cup == null)
                     return;
                 Debug.Log(cup);
-                cup.isGrabbed = true;
-
                 lastPicked = cup;
+                cup.Pick();
             }
         }
 

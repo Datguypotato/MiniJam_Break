@@ -26,7 +26,7 @@ public class CupReceiver : BaseInteractor
     private bool isEmpty = true;
     private float mixureLevel = 0; // for lerping
 
-    private float maxScale = 100;
+    private float maxScale = 60;
 
     public override void Reset()
     {
