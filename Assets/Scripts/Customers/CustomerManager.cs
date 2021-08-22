@@ -87,7 +87,7 @@ public class CustomerManager : MonoBehaviour
                 //return;
             }
         }
-        Debug.Log("Waiting line full");
+        //Debug.Log("Waiting line full");
     }
 }
 

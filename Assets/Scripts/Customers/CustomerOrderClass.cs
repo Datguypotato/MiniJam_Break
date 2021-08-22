@@ -28,19 +28,24 @@ public class CustomerOrderClass : MonoBehaviour
         customerManager.ind--;
         foreach (Customer cust in customers)
         {
-            if (cust.order < customerManager.spots.Length || cust.isangry)
+            if (cust.order < customerManager.spots.Length)
             {
                 cust.order--;
-                if (cust.nextInLine)
-                    cust.Move(customerManager.stoolspots[0].spot);
-                else
+                if (cust.nextInLine && !cust.served)
+                {
+                    cust.Move(customerManager.stoolspots[stoolInd].spot);
+                    cust.served = true;
+                }
+                else if (!cust.served)
+                {
                     cust.Move(customerManager.spots[cust.order].spot);
+                }
                 customerManager.spots[3].isFilled = false;
-                
-                if (stoolInd < customerManager.stoolspots.Length)
-                    stoolInd++;
             }
         }
+        Debug.Log(customerManager.stoolspots.Length);
+        if (stoolInd < customerManager.stoolspots.Length)
+            stoolInd++;
     }
 
     private void settingTheOrderToMake()

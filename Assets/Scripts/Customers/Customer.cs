@@ -41,7 +41,7 @@ public class Customer : BaseInteractor
     /// <param name="newPos"></param>
     public void Move(Vector3 newPos)
     {
-        Debug.Log("position received " + newPos);
+       // Debug.Log("position received " + newPos);
         StartCoroutine(MoveCoroutine(newPos));
     }
 
@@ -52,7 +52,7 @@ public class Customer : BaseInteractor
     /// <param name="newPos"></param>
     public void Move(Vector3[] newPos)
     {
-        Debug.Log("position received " + newPos);
+        //Debug.Log("position received " + newPos);
         StartCoroutine(MoveCoroutine(newPos));
     }
 
@@ -75,7 +75,7 @@ public class Customer : BaseInteractor
 
     private void Update()
     {
-        updatingWaitingTime();
+        //updatingWaitingTime();
         if (isangry)
             Destroy(gameObject);
     }
