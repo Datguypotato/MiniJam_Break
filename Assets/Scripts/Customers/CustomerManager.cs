@@ -51,7 +51,7 @@ public class CustomerManager : MonoBehaviour
     {
         UpdateCustomerLine();
         // testing reason
-        if (Input.GetKeyDown(KeyCode.Space))
+        //if (Input.GetKeyDown(KeyCode.Space))
             InstantiateCustomer();
     }
 
@@ -84,7 +84,7 @@ public class CustomerManager : MonoBehaviour
                 spots[ind].isFilled = true;
                 spots[ind].currentCustomer = customer;
 
-                return;
+                //return;
             }
         }
         Debug.Log("Waiting line full");

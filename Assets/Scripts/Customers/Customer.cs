@@ -9,7 +9,7 @@ public class Customer : BaseInteractor
     public int milkAmount;
     public int order;
     public bool nextInLine = false;
-    public bool isangry = false , ishappy = false;
+    public bool isangry = false , ishappy = false, served = false;
     [SerializeField] private Vector3 cornerPath;
 
     [SerializeField] float waitingTime, maxWaitingTime = 5;
@@ -71,11 +71,11 @@ public class Customer : BaseInteractor
             waitingTime += Time.deltaTime / 2;
         if (waitingTime >= maxWaitingTime)
             isangry = true;
-
     }
 
     private void Update()
     {
+        updatingWaitingTime();
         if (isangry)
             Destroy(gameObject);
     }
@@ -104,7 +104,6 @@ public class Customer : BaseInteractor
             }
         }
     }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         CustomerManager customerManager = FindObjectOfType<CustomerManager>();
@@ -114,5 +113,3 @@ public class Customer : BaseInteractor
         }
     }
 }
-
-

@@ -16,6 +16,7 @@ public class CustomerOrderClass : MonoBehaviour
     private Customer[] customers;
 
     private int orderCount = 1;
+    public int stoolInd = 0;
 
     private void Start()
     {
@@ -27,7 +28,7 @@ public class CustomerOrderClass : MonoBehaviour
         customerManager.ind--;
         foreach (Customer cust in customers)
         {
-            if (cust.order < customerManager.spots.Length)
+            if (cust.order < customerManager.spots.Length || cust.isangry)
             {
                 cust.order--;
                 if (cust.nextInLine)
@@ -35,6 +36,9 @@ public class CustomerOrderClass : MonoBehaviour
                 else
                     cust.Move(customerManager.spots[cust.order].spot);
                 customerManager.spots[3].isFilled = false;
+                
+                if (stoolInd < customerManager.stoolspots.Length)
+                    stoolInd++;
             }
         }
     }
@@ -53,7 +57,6 @@ public class CustomerOrderClass : MonoBehaviour
             }
         }
     }
-
     //<summary>
     //This function prints the order name and returns it's price value
     //</summary>
