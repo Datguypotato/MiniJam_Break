@@ -76,6 +76,13 @@ public class CupReceiver : BaseInteractor
                 Destroy(collision.gameObject);
             }
         }
+
+        if (collision.GetComponent<SugarCube>() != null)
+        {
+            sugarCubes++;
+            cupInfoText.text = $"Coffee: {coffeeAmount} \nMilk: {milkAmount} \nSugar: {sugarCubes}";
+            Destroy(collision.gameObject);
+        }
     }
 
     private void AddContent(DynamicParticle particle)

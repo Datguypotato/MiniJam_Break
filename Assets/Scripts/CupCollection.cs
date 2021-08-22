@@ -10,7 +10,7 @@ public class CupCollection : BaseInteractor
     {
         Debug.Log("0");
         GameObject temp = Instantiate(cupPrefab);
-        CupReceiver cup = temp.GetComponent<CupReceiver>();
+        BaseInteractor cup = temp.GetComponent<BaseInteractor>();
         cup.Pick();
         FindObjectOfType<MouseInteractor>().lastPicked = cup;
     }
