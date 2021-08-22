@@ -5,7 +5,7 @@ using UnityEngine;
 public class CustomerManager : MonoBehaviour
 {
     [SerializeField] private GameObject customerPrefab;
-    private Vector2 spawnPoint = new Vector3(-6f, 0.7f, -1); // left side of the shop
+    private Vector3 spawnPoint = new Vector3(-6f, 0.7f, -8.65f); // left side of the shop
 
     [SerializeField] private Transform waitingLineParent;
     [SerializeField] private Transform stoolsParent;

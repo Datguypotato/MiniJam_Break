@@ -14,6 +14,15 @@ public class Customer : BaseInteractor
 
     [SerializeField] float waitingTime, maxWaitingTime = 5;
 
+    [SerializeField] List<SpriteRenderer> shirts = new List<SpriteRenderer>();
+
+    [SerializeField] int ind;
+    private void Start()
+    {
+        ind = Random.Range(0, 8);
+        shirts[ind].gameObject.SetActive(true);
+    }
+
     public override void Pick()
     {
         // happends on click check if they are first in line
@@ -62,7 +71,6 @@ public class Customer : BaseInteractor
         if (waitingTime >= maxWaitingTime)
             isangry = true;
     }
-
 
     private IEnumerator MoveCoroutine(Vector3 newPos)
     {
