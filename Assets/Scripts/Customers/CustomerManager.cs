@@ -48,6 +48,8 @@ public class CustomerManager : MonoBehaviour
                 GameObject temp = Instantiate(customerPrefab, spawnPoint, Quaternion.identity);
                 Customer customer = temp.GetComponent<Customer>();
                 customer.order = ind;
+                if (customer.order == 0)
+                        customer.nextInLine = true;
                 // fill the spot
                 customer.Move(spots[ind].spot);
                 spots[ind].isFilled = true;
