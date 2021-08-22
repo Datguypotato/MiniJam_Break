@@ -13,16 +13,19 @@ public class BaseInteractor : MonoBehaviour
     [SerializeField] protected Camera cam;
     [SerializeField] protected Vector3 cupOffset;
 
+    protected void Start()
+    {
+        cam = GameObject.Find("GameCamera").GetComponent<Camera>();
+    }
+
     // on left click
     public virtual void Pick()
     {
-
     }
 
     // on right click
     public virtual void Interact()
     {
-
     }
 
     /// <summary>

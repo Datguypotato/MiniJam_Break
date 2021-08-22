@@ -28,13 +28,16 @@ public class MouseInteractor : MonoBehaviour
             if (hit.collider != null && hit.collider.CompareTag("Interactive")) // pick up interactable
             {
                 BaseInteractor cup = hit.collider.GetComponent<BaseInteractor>();
+                if (cup == null)
+                    return;
+                Debug.Log(cup);
                 cup.isGrabbed = true;
 
                 lastPicked = cup;
             }
         }
 
-        if (Input.GetMouseButtonDown(1)) // use said object
+        if (Input.GetMouseButtonDown(1) && lastPicked != null) // use said object
         {
             lastPicked.Interact();
         }
