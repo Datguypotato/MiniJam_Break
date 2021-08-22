@@ -104,4 +104,15 @@ public class Customer : BaseInteractor
             }
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        CustomerManager customerManager = FindObjectOfType<CustomerManager>();
+        if (collision.gameObject.transform.position == customerManager.stoolspots[0].spot)
+        {
+            nextInLine = false;
+        }
+    }
 }
+
+

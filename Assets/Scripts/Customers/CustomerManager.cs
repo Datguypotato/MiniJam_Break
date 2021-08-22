@@ -38,6 +38,11 @@ public class CustomerManager : MonoBehaviour
             InstantiateCustomer();
     }
 
+    void UpdateCustomerLine()
+    {
+
+    }
+
     // function for updating position
     private void InstantiateCustomer()
     {

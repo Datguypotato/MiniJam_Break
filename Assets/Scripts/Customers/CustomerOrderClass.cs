@@ -28,9 +28,9 @@ public class CustomerOrderClass : MonoBehaviour
         {
             if (cust.order < customerManager.spots.Length)
             {
-                cust.order++;
+                cust.order--;
                 if (cust.nextInLine)
-                    cust.Move((customerManager.stoolspots[0].spot));
+                    cust.Move((customerManager.stoolspots[1].spot));
                 else
                     cust.Move(customerManager.spots[cust.order].spot);
                 customerManager.spots[3].isFilled = false;
