@@ -7,6 +7,7 @@ public class Customer : BaseInteractor
 {
     public int sugarAmount;
     public int milkAmount;
+    public int order;
     public bool nextInLine = false;
     public bool isangry = false , ishappy = false;
     [SerializeField] private Vector3 cornerPath;

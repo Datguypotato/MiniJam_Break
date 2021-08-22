@@ -24,17 +24,19 @@ public class CustomerOrderClass : MonoBehaviour
     public void servingFirstCustomer()
     {
         customerManager.ind--;
-        orderCount++;
         foreach (Customer cust in customers)
         {
-            cust.Move(customerManager.spots[customerManager.ind].spot);
-            customerManager.spots[customerManager.ind].isFilled = false;
+            if (cust.order < customerManager.spots.Length)
+            {
+                cust.order++;
+                cust.Move(customerManager.spots[cust.order].spot);
+            }
+            customerManager.spots[3].isFilled = false;
         }
     }
 
     private void settingTheOrderToMake()
     {
-        customers = FindObjectsOfType<Customer>();
         foreach(Customer cust in customers)
         {
             if (cust.nextInLine)
@@ -74,6 +76,7 @@ public class CustomerOrderClass : MonoBehaviour
     private void Update()
     {
         customerManager = FindObjectOfType<CustomerManager>();
+        customers = FindObjectsOfType<Customer>();
         if (orderCount > 0)
         {
             settingTheOrderToMake();
