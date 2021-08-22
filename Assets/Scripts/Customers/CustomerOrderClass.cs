@@ -6,21 +6,22 @@ using TMPro;
 
 public class CustomerOrderClass : MonoBehaviour
 {
-    CustomerManager customerManager;
+    private CustomerManager customerManager;
 
     [SerializeField] private TextMeshProUGUI price, ordername, sugar, milk;
     [SerializeField] private string[] orders = { "Coffee", "Coffee with milk", "Sweet Coffe" };
 
     [SerializeField] private Dictionary<string, int> orderDict = new Dictionary<string, int>();
 
-    Customer[] customers;
+    private Customer[] customers;
 
-    int orderCount = 1;
+    private int orderCount = 1;
 
     private void Start()
     {
         //settingTheOrderToMake();
     }
+
     public void servingFirstCustomer()
     {
         customerManager.ind--;
@@ -30,7 +31,7 @@ public class CustomerOrderClass : MonoBehaviour
             {
                 cust.order++;
                 if (cust.nextInLine)
-                    cust.Move((customerManager.stoolspots[0].spot));
+                    cust.Move(customerManager.stoolspots[0].spot);
                 else
                     cust.Move(customerManager.spots[cust.order].spot);
                 customerManager.spots[3].isFilled = false;
@@ -40,17 +41,17 @@ public class CustomerOrderClass : MonoBehaviour
 
     private void settingTheOrderToMake()
     {
-        foreach(Customer cust in customers)
+        foreach (Customer cust in customers)
         {
             if (cust.nextInLine)
             {
                 cust.sugarAmount = Random.Range(1, 4);
                 cust.milkAmount = Random.Range(1, 10);
-                sugar.text  = cust.sugarAmount.ToString();
-                milk.text   = cust.milkAmount.ToString();
+                sugar.text = cust.sugarAmount.ToString();
+                milk.text = cust.milkAmount.ToString();
                 price.text = setOrderPrice(cust).ToString();
             }
-        }    
+        }
     }
 
     //<summary>

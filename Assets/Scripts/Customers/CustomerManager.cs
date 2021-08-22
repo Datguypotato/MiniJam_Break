@@ -14,6 +14,21 @@ public class CustomerManager : MonoBehaviour
 
     public int ind = 0;
 
+    public void PushWaitingLine()
+    {
+        for (int i = 1; i < spots.Length; i++)
+        {
+            if (spots[i].isFilled)
+            {
+                spots[i].isFilled = false;
+
+                spots[i].currentCustomer.Move(spots[i - 1].spot);
+                spots[i - 1].currentCustomer = spots[i].currentCustomer;
+                spots[i - 1].isFilled = true;
+            }
+        }
+    }
+
     private void Awake()
     {
         // setting up waiting spots
@@ -24,6 +39,7 @@ public class CustomerManager : MonoBehaviour
         {
             spots[i] = new WaitingLineSpot(waitingLineParent.GetChild(i).transform.position);
         }
+
         for (int j = 0; j < waitingLineParent.childCount; j++)
         {
             stoolspots[j] = new StoolSpot(stoolsParent.GetChild(j).transform.position);
@@ -49,12 +65,12 @@ public class CustomerManager : MonoBehaviour
                 Customer customer = temp.GetComponent<Customer>();
                 customer.order = ind;
                 if (customer.order == 0)
-                        customer.nextInLine = true;
+                    customer.nextInLine = true;
                 // fill the spot
                 customer.Move(spots[ind].spot);
                 spots[ind].isFilled = true;
                 spots[ind].currentCustomer = customer;
-                
+
                 return;
             }
         }
