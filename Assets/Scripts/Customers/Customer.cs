@@ -67,9 +67,17 @@ public class Customer : BaseInteractor
 
     void updatingWaitingTime()
     {
-        waitingTime += Time.deltaTime / 3;
+        if(nextInLine)
+            waitingTime += Time.deltaTime / 2;
         if (waitingTime >= maxWaitingTime)
             isangry = true;
+
+    }
+
+    private void Update()
+    {
+        if (isangry)
+            Destroy(gameObject);
     }
 
     private IEnumerator MoveCoroutine(Vector3 newPos)
