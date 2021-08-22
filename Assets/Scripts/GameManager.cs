@@ -2,17 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : BaseInteractor
 {
-    // Start is called before the first frame update
-    void Start()
+    private GameObject coffeeParent;
+    private GameObject cafeParent;
+
+    protected override void Start()
     {
-        
+        base.Start();
+        cafeParent.SetActive(true);
+        coffeeParent.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Pick()
     {
-        
+        // toggle between the two parent
     }
 }

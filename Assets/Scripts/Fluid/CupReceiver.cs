@@ -79,7 +79,7 @@ public class CupReceiver : BaseInteractor
 
         if (collision.GetComponent<SugarCube>() != null)
         {
-            sugarCubes++;
+            sugarCubes += 5;
             cupInfoText.text = $"Coffee: {coffeeAmount} \nMilk: {milkAmount} \nSugar: {sugarCubes}";
             Destroy(collision.gameObject);
         }
