@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class GameManager : BaseInteractor
 {
-    private GameObject coffeeParent;
-    private GameObject cafeParent;
+    [SerializeField]
+    public GameObject coffeeParent;
 
     protected override void Start()
     {
         base.Start();
-        cafeParent.SetActive(true);
         coffeeParent.SetActive(false);
     }
 
     public override void Pick()
     {
         // toggle between the two parent
+        coffeeParent.SetActive(!coffeeParent.activeInHierarchy);
     }
 }

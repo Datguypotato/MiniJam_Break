@@ -26,7 +26,15 @@ public class CupReceiver : BaseInteractor
     private bool isEmpty = true;
     private float mixureLevel = 0; // for lerping
 
-    private float maxScale = 60;
+    private float maxScale = 12;
+    [SerializeField] private float scalePercentage = 0;
+    private float startingScale;
+
+    protected override void Start()
+    {
+        base.Start();
+        startingScale = transform.localScale.y;
+    }
 
     public override void Reset()
     {
@@ -46,6 +54,11 @@ public class CupReceiver : BaseInteractor
         // nothing yet
     }
 
+    public OrderData GetOrder()
+    {
+        return new OrderData(sugarCubes, coffeeAmount, milkAmount);
+    }
+
     private void Update()
     {
         if (!isGrabbed)
@@ -58,10 +71,12 @@ public class CupReceiver : BaseInteractor
     {
         if (collision.CompareTag("DynamicParticle"))
         {
-            if (fillTransform.transform.localScale.y <= maxScale)
+            if (scalePercentage < 0.99f)
             {
-                Debug.Log("Getting filled");
-                fillTransform.transform.localScale += new Vector3(0, 1, 0);
+                scalePercentage += 0.01f;
+                float newScale = Mathf.Lerp(startingScale, maxScale, scalePercentage);
+                Debug.Log(newScale);
+                fillTransform.transform.localScale = new Vector3(fillTransform.transform.localScale.x, newScale, fillTransform.transform.localScale.z);
 
                 if (isEmpty) // for the first base color fill
                 {
@@ -103,6 +118,7 @@ public class CupReceiver : BaseInteractor
         cupInfoText.text = $"Coffee: {coffeeAmount} \nMilk: {milkAmount} \nSugar: {sugarCubes}";
     }
 
+    // when the first liquid drop in the cup
     private void SetCup(DynamicParticle particle)
     {
         switch (particle.GetState())

@@ -14,10 +14,16 @@ public class CustomerManager : MonoBehaviour
 
     public int ind = 0;
 
+    public Customer GetFirstCustomerInLine()
+    {
+        return spots[0].currentCustomer;
+    }
+
     public void PushWaitingLine()
     {
-        for (int i = 1; i < spots.Length; i++)
+        for (int i = 1; i < spots.Length; i++) // start from index 1
         {
+            // move each customer one up
             if (spots[i].isFilled)
             {
                 spots[i].isFilled = false;
@@ -27,6 +33,12 @@ public class CustomerManager : MonoBehaviour
                 spots[i - 1].isFilled = true;
             }
         }
+    }
+
+    public void LeaveStool(int a_Index)
+    {
+        stoolspots[a_Index].currentCustomer.Move(new Vector3(-8.3f, -1.15f));
+        stoolspots[a_Index].isFilled = false;
     }
 
     private void Awake()
@@ -49,23 +61,21 @@ public class CustomerManager : MonoBehaviour
 
     private void Update()
     {
-        UpdateCustomerLine();
-        // testing reason
-        //if (Input.GetKeyDown(KeyCode.Space))
-            InstantiateCustomer();
+        //UpdateCustomerLine();
+        InstantiateCustomer();
     }
 
-    void UpdateCustomerLine()
-    {
-        Customer[] customers = FindObjectsOfType<Customer>();
-        foreach (Customer cust in customers)
-        {
-            if (cust.order == 0)
-                cust.nextInLine = true;
-            else
-                cust.nextInLine = false;
-        }
-    }
+    //private void UpdateCustomerLine()
+    //{
+    //    Customer[] customers = FindObjectsOfType<Customer>();
+    //    foreach (Customer cust in customers)
+    //    {
+    //        if (cust.order == 0)
+    //            cust.nextInLine = true;
+    //        else
+    //            cust.nextInLine = false;
+    //    }
+    //}
 
     // function for updating position
     private void InstantiateCustomer()

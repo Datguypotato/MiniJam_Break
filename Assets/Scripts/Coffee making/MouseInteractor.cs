@@ -30,7 +30,8 @@ public class MouseInteractor : MonoBehaviour
                 BaseInteractor cup = hit.collider.GetComponent<BaseInteractor>();
                 if (cup == null)
                     return;
-                Debug.Log(cup);
+
+                //Debug.Log(cup);
                 lastPicked = cup;
                 cup.Pick();
             }
