@@ -13,7 +13,7 @@ public class MouseInteractor : MonoBehaviour
         if (Input.GetMouseButtonDown(0)) // left click
         {
             RaycastHit2D hit = Physics2D.Raycast(cam.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-
+            Debug.Log(hit.point);
             // debug reasons
             //if (hit.collider)
             //    Debug.Log(hit.collider.name);
